@@ -10,6 +10,7 @@ defmodule Rsvp.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
+      worker(Rsvp.Repo, [])
       # Starts a worker by calling: Rsvp.Worker.start_link(arg1, arg2, arg3)
       # worker(Rsvp.Worker, [arg1, arg2, arg3]),
     ]

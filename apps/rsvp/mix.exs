@@ -11,7 +11,9 @@ defmodule Rsvp.Mixfile do
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps()]
+     deps: deps(),
+     aliases: aliases()
+   ]
   end
 
   # Configuration for the OTP application
@@ -19,7 +21,7 @@ defmodule Rsvp.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger],
+    [extra_applications: [:logger, :postgrex, :phoenix_ecto],
      mod: {Rsvp.Application, []}]
   end
 
@@ -37,6 +39,15 @@ defmodule Rsvp.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:phoenix_ecto, "~> 3.0"},
+      {:postgrex, ">= 0.0.0"}
+    ]
+  end
+
+  defp aliases do
+    [
+      "init": ["ecto.create", "ecto.migrate", "run priv/repo/seed.exs"]
+    ]
   end
 end
